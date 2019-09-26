@@ -7,6 +7,8 @@ if($this->session->flashdata('success')) {
 		</div>';
 }
 
+
+
 if($this->session->flashdata('error')) {
 	echo '<div class="alert alert-danger alert-dismissible">
 		  	<button type="button" class="close" aria-label="close" data-dismiss="alert">&times;</button>	
