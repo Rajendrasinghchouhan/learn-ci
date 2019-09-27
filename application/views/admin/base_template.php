@@ -410,7 +410,7 @@
           <ul class="treeview-menu">
             <?php $class = ($this->router->fetch_method()=='class') ? 'active' : '';?>
               <li class="<?php echo $class;?>"><a href='<?php echo base_url('mainclass/class');?>'><i class="fa fa-laptop"></i></i> Class List</a></li>
-            <?php $class = ($this->router->fetch_method()=='classform') ? 'active' : '';?>
+            <?php $class = ($this->router->fetch_method()=='classform' || $this->router->fetch_method()=='classinsert') ? 'active' : '';?>
               <li class="<?php echo $class;?>"><a href='<?php echo base_url('mainclass/classform');?>'><i class="fa fa-laptop"></i> Add Class</a></li>
           </ul>
         </li>
@@ -426,7 +426,7 @@
           <ul class="treeview-menu">
             <?php $class = ($this->router->fetch_method()=='streamlist') ? 'active' : '';?>
               <li class="<?php echo $class;?>"><a href='<?php echo base_url('stream/streamlist');?>'><i class="fa fa-laptop"></i> Stream List</a></li>
-            <?php $class = ($this->router->fetch_method()=='streamform') ? 'active' : '';?>
+            <?php $class = ($this->router->fetch_method()=='streamform' || $this->router->fetch_method()=='streaminsert') ? 'active' : '';?>
               <li class="<?php echo $class;?>" ><a href='<?php echo base_url('stream/streamform');?>'><i class="fa fa-laptop"></i> Add Stream</a></li>
           </ul>
         </li>

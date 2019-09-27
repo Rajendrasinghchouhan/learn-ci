@@ -2,24 +2,25 @@
 <section class="content">
   <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
+          <a href="<?php echo base_url('mainclass/class');?>"><div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fas fa-university"></i></span>
             
             <div class="info-box-content">
-              <span class="info-box-text classtext"><a href="<?php echo base_url('students/class');?>">Class</a></span>
+              <span class="info-box-text classtext">Class</span>
               
               <span class="info-box-number"><?php $countClass = (isset($getClass)) ? $getClass : ""; echo $countClass;?></span>
             
             </div>
             <!-- /.info-box-content -->
-          </div>
+          </div></a>
           <!-- /.info-box -->
-    </div><div class="col-md-3 col-sm-6 col-xs-12">
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fas fa-stream"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text classtext"><a href="<?php echo base_url('students/streamform');?>">Stream</a></span>
+              <span class="info-box-text classtext"><a href="<?php echo base_url('stream/streamlist');?>">Stream</a></span>
               <span class="info-box-number"><?php if(isset($allStream)) echo $allStream;?></span>
             </div>
             <!-- /.info-box-content -->
@@ -55,7 +56,7 @@
             <span class="info-box-icon bg-aqua"><i class="fab fa-product-hunt"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Products</span>
+              <span class="info-box-text classtext"><a href="<?php echo base_url('admin/products');?>">Products</a></span>
               <span class="info-box-number"><?php if(isset($allProduct)) echo $allProduct;?></span>
             </div>
             <!-- /.info-box-content -->

@@ -1,6 +1,13 @@
 
 <section class="content">
-
+	<?php 
+		if($this->session->flashdata('success')) {
+			echo '<div class="alert alert-success alert-dismissible">
+					<button type="button" class="close" aria-label="close" data-dismiss="alert">&times;</button>
+		  			<strong>Success!</strong> '.$this->session->flashdata("success").'
+				</div>';
+		}
+	?>
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-6">
 			<h1>Class List</h1>

@@ -13,6 +13,8 @@ class Students extends CI_Controller {
 		//print_r($data['students']);die();
 		
 		//$data['students'];
+		
+
 		$this->template->load('admin/base_template', 'student_list', $data);
 	}
 	public function studentform($id=FALSE)
@@ -31,6 +33,7 @@ class Students extends CI_Controller {
 		$this->load->model('Classes');
 
 		if($this->input->post('save')) {
+
 			//print_r($this->input->post());die();
 			//$this->check_valdation($this->input->post());
 
@@ -40,7 +43,7 @@ class Students extends CI_Controller {
 			$this->form_validation->set_rules('email', 'Student Email', 'valid_email|required|is_unique[students.email]');
 			$this->form_validation->set_rules('address', 'Student Address', 'trim|required');
 			$this->form_validation->set_rules('class', 'Student Class', 'required');
-			$this->form_validation->set_rules('streams','Student Stream', 'required');
+			//$this->form_validation->set_rules('streams','Student Stream', 'required');
 
 			if ($this->form_validation->run() != FALSE)
             {
@@ -49,16 +52,15 @@ class Students extends CI_Controller {
 				$save['class'] = $this->input->post('class');
 				$save['email'] = $this->input->post('email');
 				$save['address'] = $this->input->post('address');
-				$save['student_stream_id'] = $this->input->post('streams');
+				//$save['student_stream_id'] = $this->input->post('streams');
 				//print_r($save);die();
 				$this->Student->add_student($save);
-
+				
 				$this->session->set_flashdata('success', 'Student Inserted Successfully !');
-
 				redirect(base_url('students'));
 			}
 			else
-			{		
+			{		//echo 'asdf';die();
 				$data['allerrors'] = $this->form_validation->error_array();
 				//print_r($data);die();
 				$data['allclass'] = $this->Classes->getallclass();// fetch all mainclass
@@ -138,6 +140,7 @@ class Students extends CI_Controller {
 			$sval = ($status==0) ? 1 : 0;
 			$update = array('status'=>$sval);
 			$this->Student->updatestatus($id,$update);
+			$this->session->set_flashdata('success', 'Student status updated Successfully !');
 			redirect(base_url('students'));
 		}
 	}
@@ -147,7 +150,8 @@ class Students extends CI_Controller {
 		{
 			//echo 'asd';die();
 			$this->load->model('Student');
-			$this->Student->studentDelete($id);	
+			$this->Student->studentDelete($id);
+			$this->session->set_flashdata('success', 'Student Deleted Successfully !');	
 			redirect(base_url('students'),'refresh');
 		}
 	}

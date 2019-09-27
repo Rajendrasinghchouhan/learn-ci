@@ -21,6 +21,7 @@ class Mainclass extends CI_Controller {
 		
 		$this->load->model('Classes');
 		if($this->input->post('save')) {
+
 			//echo 'asd';die;
 			$this->load->library('form_validation');
 
@@ -31,7 +32,14 @@ class Mainclass extends CI_Controller {
 				$save['class_stream_allow'] = ($this->input->post('classcheck')) ? 1 : 0; 
 				//print_r($save);die();
 				$data['class'] = $this->Classes->add_class($save);
+				$this->session->set_flashdata('success', 'Class Inserted Successfully !');
 				redirect(base_url('mainclass/class'));
+			}
+			else
+			{
+				$data['allerrors'] = $this->form_validation->error_array();
+				//print_r($data['allerrors']);die();
+				$this->template->load('admin/base_template', 'classform', $data);
 			}
 		}
 		
@@ -44,6 +52,7 @@ class Mainclass extends CI_Controller {
 			$update['class_stream_allow'] = ($this->input->post('classcheck')) ? 1 : 0;
 			//print_r($update);die();
 			$data['classupdate'] = $this->Classes->editclass($Id,$update);
+			$this->session->set_flashdata('success', 'Class Updated Successfully !');
 			redirect(base_url('mainclass/class'));
 		}
 	}
