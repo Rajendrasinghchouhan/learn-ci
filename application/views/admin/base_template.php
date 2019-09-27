@@ -362,8 +362,8 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        
-        <li class="treeview">
+        <?php $class = ($this->router->fetch_class()=='category') ? 'active menu-open' : '';?>
+        <li class="treeview <?php echo $class;?>">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
 
@@ -373,8 +373,10 @@
             </span>
           </a>
           <ul class="treeview-menu ">
-            <li class="active"><a href='#'><i class="fa fa-circle-o"></i>Categories List</a></li>
-            <li><a href='#'><i class="fa fa-circle-o"></i> Add Categories</a></li>
+            <?php $class = ($this->router->fetch_method()=='index') ? 'active' : '';?>
+            <li class="<?php echo $class;?>"><a href='<?php echo base_url('admin/category');?>'><i class="fa fa-circle-o"></i>Categories List</a></li>
+            <?php $class = ($this->router->fetch_method()=='categoryform') ? 'active' : '';?>
+            <li class="<?php echo $class;?>"><a href='<?php echo base_url('admin/category/categoryform');?>'><i class="fa fa-circle-o"></i> Add Categories</a></li>
           </ul>
         </li>
         <?php  //echo '---->'.$this->router->fetch_class();
