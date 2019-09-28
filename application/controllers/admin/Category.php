@@ -16,7 +16,7 @@ class Category extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('categoryname', 'Category', 'required');
 
-		// -------------- ************** insert work start ************ ---------------
+		// -------------- ************** Insert Work Start ************ ---------------
 		if($this->input->post('save'))
 		{
 			if ($this->form_validation->run() != FALSE)
@@ -34,7 +34,7 @@ class Category extends CI_Controller {
 				//print_r($data);die();
 			}
 		}
-
+		// ------------ *************** Insert Work End ************ --------------- 
 		// fetch data with id
 		$data['editcategory'] = $this->categorymodel->geteditdata($id);
 		//print_r($data);die();

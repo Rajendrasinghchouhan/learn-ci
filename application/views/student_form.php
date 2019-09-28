@@ -157,7 +157,7 @@ if($this->session->flashdata('error')) {
 			  	var streamvalid = '';//(empty($allerrors['streams'])) ? "" : $allerrors['streams'];
 			  	$(data.strams).each(function(key, value) {
 			  		console.log(value); 
-			  		var selected = (value.stream_id == <?php echo $geteditstudents->student_stream_id ?>) ? "selected" : "";
+			  		var selected = (value.stream_id == <?php echo (isset($geteditstudents)) ? $geteditstudents->student_stream_id : "0" ?>) ? "selected" : "";
 	  		      	listItems += "<option "+selected+" value='"+value.stream_id+"'>"+value.stream_class_name+"</option>";
 			  	});
 
