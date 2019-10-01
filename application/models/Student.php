@@ -63,4 +63,11 @@ class Student extends CI_Model {
 		return $this->db->get('products')->num_rows();
 	}
 	// board work end}
+
+	//multiple delete work
+	function deleteAll($Id)
+	{
+		$this->db->where_in('id',$Id)
+		->delete('students');
+	}
 }

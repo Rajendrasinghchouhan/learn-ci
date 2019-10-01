@@ -167,4 +167,27 @@ class Students extends CI_Controller {
 				
 		echo json_encode($data);
 	}
+
+	function deleteall()
+	{
+		$this->load->model('Student');
+		//click on delete all button
+		if($this->input->post('bulk_delete'))
+		{
+			$ids = $this->input->post('checked_id');
+			if(!empty($ids))
+			{
+				//print_r($ids);die();
+				$delete = $this->Student->deleteAll($ids);
+				
+				$this->session->set_flashdata('success', 'Delete Successfully !');
+				redirect(base_url('students'),'refresh');	
+			}
+			else
+			{//echo 'asdf123';die();
+				$success = 'select at least 1 record to delete';
+				redirect(base_url('students'),'refresh');
+			}
+		}
+	}
 }

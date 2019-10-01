@@ -72,8 +72,9 @@ class Products extends CI_Controller {
 
 	public function form($id=false){
 		$this->load->model('Product');
-		$data['categories'] = $this->Product->getCategories();
 
+		$data['categories'] = $this->Product->getCategories();
+		//print_r($data['categories']);die();
 
 		if($id) {
 			$data['product'] = $this->Product->getProductData($id); 
@@ -89,6 +90,8 @@ class Products extends CI_Controller {
 	}
 
 	public function insert(){
+		$this->load->model('Product');
+		$data['categories'] = $this->Product->getCategories();
 		//including validation library
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -96,18 +99,13 @@ class Products extends CI_Controller {
 		$this->form_validation->set_rules('title', 'Title', 'trim|required|min_length[5]',
 			array('required'=>'please fill title'));
 		//validation for description
-		$this->form_validation->set_rules('description', 'Description', 'trim|required|max_length[12]');
+		$this->form_validation->set_rules('description', 'Description', 'trim|required|max_length[200]');
 		//validation for select category
 		$this->form_validation->set_rules('category_id', 'Choose Category', 'required');
 		//validation for image
 		$this->form_validation->set_rules('image', 'Please Upload Image', 'required');
 		//validation for stock
 		$this->form_validation->set_rules('stock', 'Enter Stock', 'trim|required|numeric');
-		
-		if($this->form_validation->run() == false)
-		{
-			redirect(base_url('admin/products/form'),'refresh');
-		}
 
 		$data['title'] = $this->input->post('title');
 		$data['description'] = $this->input->post('description');
@@ -130,7 +128,7 @@ class Products extends CI_Controller {
 		    //print_r($error);die;
 		    $this->session->set_flashdata('error',$error['error']);
 		    //exit();
-		    redirect(base_url('admin/products/form'),'refresh');
+		    //redirect(base_url('admin/products/form'),'refresh');
 		}
 
     	
@@ -139,11 +137,23 @@ class Products extends CI_Controller {
 		$data['image'] = $file['file_name'];
 		//print_r($data);die();
 		if($this->input->post('save')){
-			$this->load->model('Product');
-			$this->Product->addProduct($data);
-			//print_r($data);die();
-		}
 
+			if($this->form_validation->run() != false)
+			{
+				$this->load->model('Product');
+				$this->Product->addProduct($data);
+				//print_r($data);die();
+			}
+			else 
+			{
+
+				$data['allerrors'] = $this->form_validation->error_array();
+				//print_r($data['allerrors']);die();
+				$this->template->load('admin/base_template','admin/add_product',$data);
+
+			}
+		}
+		
 		//redirect to list page
 		//$this->load->helper('url');
 		//redirect(base_url('admin/products/index'), 'refresh');		
